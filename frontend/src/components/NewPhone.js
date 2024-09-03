@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 function NewPhone(props) {
     const {contact, phones, setPhones} = props;
-    const [number, setNumber] = useState('');
-    const [name, setName] = useState('');
+    const [phonenumber, setPhoneNumber] = useState(''); //updated to phone number
+    const [phonetype, setPhonetype] = useState(''); //updated to phone type
 
     async function createPhone(e) {
         e.preventDefault();
@@ -14,8 +14,9 @@ function NewPhone(props) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                number,
-                name
+                phonenumber,//updated so that it is the same as the backend (postsql)
+                phonetype,
+                contactId: contact.id
             })
         });
 
@@ -25,15 +26,21 @@ function NewPhone(props) {
             setPhones([...phones, data]);
         }
 
-        setNumber('');
-        setName('');
+        setPhoneNumber('');
+        setPhonetype(''); //updated
     }
 
 	return (
         <form onSubmit={createPhone} onClick={(e) => e.stopPropagation()} className='new-phone'>
-            <input type='text' placeholder='Name' onChange={(e) => setName(e.target.value)} value={name}/>
-            <input type='text' placeholder='Phone Number' onChange={(e) => setNumber(e.target.value)} value={number}/>
-            <button className='button green' type='submit'>Add</button>
+        <select onChange={(e) => setPhonetype(e.target.value)} value={phonetype}> 
+            <option value="Phone_type" disabled >Phone Type</option>
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Other">Other</option>
+        </select>
+            <input type='text' placeholder='Phone Number' onChange={(e) => setPhoneNumber(e.target.value)} value={phonenumber}/>
+            <button className='button green' type='submit'>Add Choiru's Phone</button>
         </form>
 	);
 }

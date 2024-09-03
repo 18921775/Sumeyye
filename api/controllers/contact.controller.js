@@ -7,6 +7,7 @@ const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
     const contact = {
         name: req.body.name,
+        address: req.body.address
     };
 
     Contacts.create(contact)
@@ -58,7 +59,7 @@ exports.update = (req, res) => {
         where: { id: id }
     })
     .then(num => {
-        if (num == 1) {
+        if (num[0]=== 1) {  //this was num ==1
             res.send({
                 message: "Contact was updated successfully."
             });

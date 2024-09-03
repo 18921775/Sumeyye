@@ -8,6 +8,9 @@ module.exports = (sequelize, Sequelize) => {
         name: {
             type: Sequelize.STRING
         },
+        address: {
+            type: Sequelize.TEXT  //added address
+        }
     });
   
     return Contact;
