@@ -6,13 +6,18 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
         },
         name: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            references: {
+                model: 'contacts',
+                attribute: 'name',
+            }
+            
         },
         phone_number: {
-            type: Sequelize.STRING //added phone number
+            type: Sequelize.INTEGER //added phone number
         },
         phone_type: {
-            type: Sequelize.STRING //added phone type
+            type: Sequelize.ENUM ('Home','Mobile','Work','Other')//added phone type
         },
         contactId: {
             type: Sequelize.INTEGER,

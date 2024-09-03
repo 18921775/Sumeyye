@@ -1,15 +1,18 @@
 const db = require("../models");
 const Phones = db.phones;
+const Contacts = db.contacts;
 const Op = db.Sequelize.Op;
 
 // Create phone
 exports.create = (req, res) => {
     const phone = {
         name: req.body.name,
-        phonenumber: req.body.phone_number,
-        phonetype: req.body.phone_type,  // added phone number and phone type as this is in the table
+        phone_number: req.body.phone_number,
+        phone_type: req.body.phone_type,  // added phone number and phone type as this is in the table
         contactId: parseInt(req.params.contactId)
+
     };
+
 
     Phones.create(phone)
         .then(data => {
@@ -27,6 +30,12 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
 
     Phones.findAll({
+
+        include: [{
+            model: Contact,
+            attributes: ['name'] // Select only the 'name' column from the Contact table
+        }],
+
         where: {
             contactId: parseInt(req.params.contactId)
         }
