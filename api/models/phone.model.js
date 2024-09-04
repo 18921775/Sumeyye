@@ -5,14 +5,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true,
         },
-        name: {
-            type: Sequelize.STRING,
-            references: {
-                model: 'contacts',
-                attribute: 'name',
-            }
-            
-        },
+       
         phone_number: {
             type: Sequelize.INTEGER //added phone number
         },
