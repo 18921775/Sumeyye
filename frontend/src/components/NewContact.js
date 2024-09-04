@@ -5,6 +5,7 @@ function NewContact(props) {
     const [name, setName] = useState('');
     const [address, setAddress] = useState(''); //adding address into the function.
 
+
     async function createContact(e) {
         e.preventDefault();
 
@@ -15,7 +16,9 @@ function NewContact(props) {
             },
             body: JSON.stringify({
                 name,
-                address //adding address
+                address,//adding address
+                company_name,
+                company_address
             })
         });
 
@@ -26,13 +29,15 @@ function NewContact(props) {
         }
 
         setName('');
-        setAddress(''); //ensuring the address field is clear.
+        setAddress(''); 
+    
     }
 
 return (
     <form className='new-contact' onSubmit={createContact}>
         <input type='text' placeholder='Name' onChange={(e) => setName(e.target.value)} value={name}/>
         <input type='text' placeholder='Address' onChange={(e) => setAddress(e.target.value)} value={address}/>
+        
         <button className='button green' type='submit'>Create Contacts</button>
     </form>
 );
